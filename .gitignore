@@ -1,0 +1,17 @@
+# Compiled Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.bin
+*.o
+*.a
+*.log
+
+# Output of the go coverage tool
+*.out
+
+
+# IDE files for Zed
+.zed/
