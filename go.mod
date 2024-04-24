@@ -1,4 +1,4 @@
-module amLazy
+module github.com/nooooaaaaah/amLazy
 
 go 1.22.2
 

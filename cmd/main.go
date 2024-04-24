@@ -1,35 +1,34 @@
 package main
 
 import (
-	"amLazy/config"
-	"amLazy/openai"
-	"amLazy/tui"
-	"fmt"
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
-	// "github.com/yourusername/myassistant/config"
-	// "github.com/yourusername/myassistant/openai"
-	// "github.com/yourusername/myassistant/tui"
+	"github.com/nooooaaaaah/amLazy/config"
+	"github.com/nooooaaaaah/amLazy/openai"
+	"github.com/nooooaaaaah/amLazy/tui"
 )
 
 func main() {
 	config.LoadEnv()
+	config.InitLogger()
+	defer config.GetLogger().Close()
+
+	logger := config.GetLogger()
+	logger.LogInfo("Starting amLazy application")
 	apiKey := config.GetEnv("OPENAI_API_KEY")
 	assistantID := config.GetEnv("OPENAI_ASSISTANT_ID")
 	if apiKey == "" || assistantID == "" {
-		fmt.Println("API key or Assistant ID not set")
+		logger.LogError("API key or Assistant ID not set")
 		os.Exit(1)
 	}
 
-	openai.NewClient(apiKey, assistantID)
-	// client := openai.NewClient(apiKey, assistantID)
+	client := openai.NewClient(apiKey, assistantID)
+	model := tui.InitialModel(client)
 
-	model := tui.InitialModel()
-
-	p := tea.NewProgram(model, tea.WithAltScreen())
+	p := tea.NewProgram(model)
 	if _, err := p.Run(); err != nil {
-		fmt.Fprintf(os.Stderr, "Error running program: %s\n", err)
+		logger.LogErrorf("Error running program: %s\n", err)
 		os.Exit(1)
 	}
 }
