@@ -8,6 +8,10 @@
 *.o
 *.a
 *.log
+*.app
+
+# Ignore the built binary
+amLazy
 
 # Output of the go coverage tool
 *.out
