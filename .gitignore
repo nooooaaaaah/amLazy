@@ -13,5 +13,8 @@
 *.out
 
 
+# Env
+.env
+
 # IDE files for Zed
 .zed/
