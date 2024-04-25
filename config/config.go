@@ -1,23 +1,26 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/joho/godotenv"
 )
 
-// LoadEnv loads the environment variables from a .env file.
 func LoadEnv() {
-	if err := godotenv.Load(); err != nil {
-		fmt.Println("No .env file found")
+	configPath := filepath.Join(os.Getenv("HOME"), ".config", "amLazy", "config.env")
+	if err := godotenv.Load(configPath); err != nil {
+		log.Printf("No .env file found at %s", configPath)
 	}
 }
 
-// GetEnv retrieves the value of an environment variable.
 func GetEnv(key string) string {
-	return os.Getenv(key)
+	ev := os.Getenv(key)
+	if ev == "" {
+		log.Fatalf("The value for %s was not found in environment", key)
+	}
+	return ev
 }
 
 type CustomLogger struct {
