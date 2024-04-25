@@ -29,7 +29,7 @@ type CustomLogger struct {
 }
 
 func startLogger() *CustomLogger {
-	logFile, err := os.OpenFile("amLazy.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
+	logFile, err := os.OpenFile(filepath.Join(os.Getenv("HOME"), ".config", "amLazy", "amLazy.log"), os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatalf("error opening log file: %v", err)
 	}

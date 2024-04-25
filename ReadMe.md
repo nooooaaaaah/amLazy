@@ -8,6 +8,7 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 
 - **Install via pkg managers**: Create a pkg for brew and others
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
+- **Refine a comand**: Reprompt so you can add more to a command
 - **Educational Mode**: Toggle an educational mode that explains the function and potential uses of different commands and flags.
 
 ## Getting Started
@@ -18,7 +19,33 @@ To start using amLazy, ensure you have a modern terminal emulator and basic shel
    As of now just Clone and build. Then copy to bin or wherever your commands are stored.
 
 ```sh
-TODO
+git clone https://github.com/nooooaaaaah/amLazy.git
+```
+
+Then create a directory amLazy under .config for api keys
+
+```sh
+mkdir ~/.config/amLazy
+```
+
+With the file config.env
+
+```sh
+cd ~/.config/amLazy
+touch config.env
+```
+
+Then open the confi.env file and add your api key and assistant id
+
+```sh
+nvim config.env
+```
+
+It should look like this
+
+```.env
+OPENAI_API_KEY="{YOUR_API_KEY}"
+OPENAI_ASSISTANT_ID="{YOUR_ASSISTANT_ID}"
 ```
 
 2. **Running amLazy**
@@ -30,8 +57,6 @@ amLazy
 > "Type your question"
 ```
 
-Upon launch, you'll be greeted with a minimalist TUI interface asking you to create your first virtual bubble tea. Navigate through the menu using your keyboard arrows and select ingredients to add to your tea.
-
 3. **Using the Assistant**
 
 - **Type your task or command intent**: Such as "compress folder" or "download file from URL".
@@ -41,7 +66,6 @@ amLazy
 > compress folder to zip
 ```
 
-- **Follow the interactive suggestions**: amLazy will offer command options or ask follow-up questions to refine your command.
 - **Execute or Edit**: Once you're satisfied with the suggested command, execute it directly from amLazy or copy it to the clipboard for manual execution.
 
 4. **Enjoy Learning**: As you use amLazy, take advantage of the educational mode to deepen your understanding of the shell commands and their options.
