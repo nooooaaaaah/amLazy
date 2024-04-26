@@ -19,6 +19,11 @@ type Model struct {
 	Info   string
 }
 
+var controlKeysStyle = lipgloss.NewStyle().
+	Foreground(lipgloss.Color("#acacac")).
+	PaddingTop(1).
+	PaddingBottom(1)
+
 func InitialModel(client *openai.Client) *Model {
 	input := textinput.New()
 	input.Placeholder = "Type your question"
@@ -107,7 +112,7 @@ func (m *Model) makeAPICall() tea.Cmd {
 }
 
 func (m *Model) View() string {
-	controlKeys := "[Ctrl+C] Quit [Enter] Send [Ctrl+Y] Copy to Clipboard"
+	controlKeys := controlKeysStyle.Render("[Ctrl+C] Quit [Enter] Send [Ctrl+Y] Copy to Clipboard")
 	if m.Sent && m.Output == "" {
 		return fmt.Sprintf("%s\nSending...\n%s", m.Input.View(), controlKeys)
 	}
