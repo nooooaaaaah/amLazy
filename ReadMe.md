@@ -50,6 +50,13 @@ OPENAI_API_KEY="{YOUR_API_KEY}"
 OPENAI_ASSISTANT_ID="{YOUR_ASSISTANT_ID}"
 ```
 
+#### Setup Assistant
+
+Go to open AI's playground to create an assistant.
+Feel free to use my instructions:
+
+> you are a tool to generate commands to be run in shell environments like zsh. You can pipe commands together but can not create full scripts. Just give the code for the user to run in their shell. only provide the command in the output.
+
 2. **Running amLazy**
 
 Launch amLazy with the following command:
