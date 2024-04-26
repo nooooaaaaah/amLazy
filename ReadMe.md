@@ -9,6 +9,7 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 
 ## TODO
 
+- **Better app logging**: need to have togglable logging
 - **Provide ai with some sys info**: Send the os and which shell the user has activated. Makes the prompting less verbose
 - **Install via pkg managers**: Create a pkg for brew and others
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
