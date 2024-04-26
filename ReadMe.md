@@ -1,5 +1,7 @@
 Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User Interface) that helps you write shell commands with ease, all while enjoying a virtual bubble tea experience. Ideal for both beginners and seasoned shell users, amLazy offers a unique approach to navigating the complexities of the command line.
 
+![](https://github.com/nooooaaaaah/amLazy/blob/main/docs/demo.gif)
+
 ## Feature
 
 - **Command Builder**: get a command based on the provided prompt
