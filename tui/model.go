@@ -3,6 +3,7 @@ package tui
 import (
 	"fmt"
 
+	"github.com/atotto/clipboard"
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -15,6 +16,7 @@ type Model struct {
 	Output string
 	Client *openai.Client
 	Sent   bool
+	Info   string
 }
 
 func InitialModel(client *openai.Client) *Model {
@@ -28,7 +30,6 @@ func InitialModel(client *openai.Client) *Model {
 		Input:  input,
 		Output: "",
 		Client: client,
-		Sent:   false,
 	}
 }
 
@@ -41,25 +42,54 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
+		// config.GetLogger().LogInfof("Key pressed: %v", msg.String()) // Confirm key detection in logs
+
 		switch msg.Type {
 		case tea.KeyCtrlC, tea.KeyEscape:
 			return m, tea.Quit
 		case tea.KeyEnter:
-			if !m.Sent { // Only process the input if it hasn't been sent
-				m.Sent = true  // Set the flag to true after sending
-				m.Input.Blur() // Optionally blur the input after sending
+			if !m.Sent {
+				m.Sent = true
+				m.Input.Blur()
 				cmd = m.makeAPICall()
 			}
 			return m, cmd
+		case tea.KeyCtrlY:
+			// Check that the output exists and the API call has been completed
+			config.GetLogger().LogInfof("Ctrl+Y pressed: %v", m.Sent) // Ensure this log appears
+			if m.Sent && m.Output != "" {
+				cmd = copyToClipboard(m.Output)
+				return m, cmd
+			}
 		}
+
 	case string:
-		// Handle the response message from makeAPICall
+		if msg == "copied" {
+			m.Info = "Output copied to clipboard!"
+			return m, tea.Quit
+		}
 		m.Output = msg
+		return m, nil
+
+	case error:
+		m.Info = fmt.Sprintf("Failed to copy: %v", msg)
 		return m, nil
 	}
 
-	m.Input, cmd = m.Input.Update(msg) // Continue handling other inputs
+	m.Input, cmd = m.Input.Update(msg)
 	return m, cmd
+}
+
+func copyToClipboard(text string) tea.Cmd {
+	return func() tea.Msg {
+		config.GetLogger().LogInfo("Attempting to copy to clipboard") // New log entry
+		if err := clipboard.WriteAll(text); err != nil {
+			config.GetLogger().LogErrorf("Copy to clipboard failed: %v", err)
+			return fmt.Errorf("copy to clipboard failed: %v", err)
+		}
+		config.GetLogger().LogInfo("Successfully copied to clipboard") // Confirm successful copy
+		return "copied"                                                // Return a success message
+	}
 }
 
 // makeAPICall handles the interaction with OpenAI asynchronously and updates the model
@@ -80,5 +110,5 @@ func (m *Model) View() string {
 	if m.Sent && m.Output == "" {
 		return fmt.Sprintf("%s\nSending...", m.Input.View())
 	}
-	return fmt.Sprintf("%s\n%s", m.Input.View(), m.Output)
+	return fmt.Sprintf("%s\n%s\n%s", m.Input.View(), m.Output, m.Info)
 }
