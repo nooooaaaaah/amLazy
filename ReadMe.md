@@ -70,6 +70,4 @@ amLazy
 > compress folder to zip
 ```
 
-- **Execute or Edit**: Once you're satisfied with the suggested command, execute it directly from amLazy or copy it to the clipboard for manual execution.
-
-4. **Enjoy Learning**: As you use amLazy, take advantage of the educational mode to deepen your understanding of the shell commands and their options.
+- **Execute or Edit**: Once you're satisfied with the suggested command copy it to the clipboard for manual execution.
