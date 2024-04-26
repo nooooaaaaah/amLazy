@@ -107,8 +107,9 @@ func (m *Model) makeAPICall() tea.Cmd {
 }
 
 func (m *Model) View() string {
+	controlKeys := "[Ctrl+C] Quit [Enter] Send [Ctrl+Y] Copy to Clipboard"
 	if m.Sent && m.Output == "" {
-		return fmt.Sprintf("%s\nSending...", m.Input.View())
+		return fmt.Sprintf("%s\nSending...\n%s", m.Input.View(), controlKeys)
 	}
-	return fmt.Sprintf("%s\n%s\n%s", m.Input.View(), m.Output, m.Info)
+	return fmt.Sprintf("%s\n%s\n%s\n%s", m.Input.View(), m.Output, m.Info, controlKeys)
 }
