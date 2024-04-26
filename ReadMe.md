@@ -3,9 +3,11 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 ## Feature
 
 - **Command Builder**: get a command based on the provided prompt
+- **Copy Output**: press crtl-y to copy output and close the app
 
 ## TODO
 
+- **Provide ai with some sys info**: Send the os and which shell the user has activated. Makes the prompting less verbose
 - **Install via pkg managers**: Create a pkg for brew and others
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
 - **Refine a comand**: Reprompt so you can add more to a command
@@ -60,6 +62,8 @@ amLazy
 3. **Using the Assistant**
 
 - **Type your task or command intent**: Such as "compress folder" or "download file from URL".
+
+> Add "on {YOUR SHELL ENV}" for better results
 
 ```bash
 amLazy
