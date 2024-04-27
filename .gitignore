@@ -9,6 +9,7 @@
 *.a
 *.log
 *.app
+bin/
 
 # Ignore the built binary
 amLazy

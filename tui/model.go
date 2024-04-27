@@ -61,10 +61,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, cmd
 		case tea.KeyCtrlY:
 			// Check that the output exists and the API call has been completed
-			config.GetLogger().LogInfof("Ctrl+Y pressed: %v", m.Sent) // Ensure this log appears
 			if m.Sent && m.Output != "" {
 				cmd = copyToClipboard(m.Output)
 				return m, cmd
+			}
+		case tea.KeyCtrlI:
+			if m.Sent {
+				m.Sent = false
+				m.Input.Focus()
+				m.Output = ""
 			}
 		}
 
@@ -83,6 +88,14 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	m.Input, cmd = m.Input.Update(msg)
 	return m, cmd
+}
+
+func (m *Model) View() string {
+	controlKeys := controlKeysStyle.Render("[Ctrl+C] Quit [Enter] Send [Ctrl+Y] Copy to Clipboard [Ctrl+I] Reprompt")
+	if m.Sent && m.Output == "" {
+		return fmt.Sprintf("%s\nSending...\n%s", m.Input.View(), controlKeys)
+	}
+	return fmt.Sprintf("%s\n%s\n%s\n%s", m.Input.View(), m.Output, m.Info, controlKeys)
 }
 
 func copyToClipboard(text string) tea.Cmd {
@@ -109,12 +122,4 @@ func (m *Model) makeAPICall() tea.Cmd {
 		}
 		return response
 	}
-}
-
-func (m *Model) View() string {
-	controlKeys := controlKeysStyle.Render("[Ctrl+C] Quit [Enter] Send [Ctrl+Y] Copy to Clipboard")
-	if m.Sent && m.Output == "" {
-		return fmt.Sprintf("%s\nSending...\n%s", m.Input.View(), controlKeys)
-	}
-	return fmt.Sprintf("%s\n%s\n%s\n%s", m.Input.View(), m.Output, m.Info, controlKeys)
 }
