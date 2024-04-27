@@ -14,6 +14,14 @@ type Client struct {
 	assistantID string
 }
 
+// NewClient creates a new Client instance with the specified API key and assistant ID.
+func NewClient(apiKey, assistantID string) *Client {
+	return &Client{
+		apiClient:   openai.NewClient(apiKey),
+		assistantID: assistantID,
+	}
+}
+
 func (c *Client) ProcessInput(input string) (string, error) {
 	logger := config.GetLogger()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
