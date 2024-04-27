@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -21,6 +22,18 @@ func GetEnv(key string) string {
 		log.Fatalf("The value for %s was not found in environment", key)
 	}
 	return ev
+}
+
+func getUserShell() string {
+	return GetEnv("USERS_SHELL")
+}
+
+func getUserOS() string {
+	return GetEnv("USERS_OS")
+}
+
+func GetEnvInstructions() string {
+	return fmt.Sprintf("My shell is %s, and my os is %s. Only return one option, just return the command", getUserShell(), getUserOS())
 }
 
 type CustomLogger struct {

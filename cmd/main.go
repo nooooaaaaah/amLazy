@@ -18,6 +18,7 @@ func main() {
 	logger.LogInfo("Starting amLazy application")
 	apiKey := config.GetEnv("OPENAI_API_KEY")
 	assistantID := config.GetEnv("OPENAI_ASSISTANT_ID")
+
 	if apiKey == "" || assistantID == "" {
 		logger.LogError("API key or Assistant ID not set")
 		os.Exit(1)

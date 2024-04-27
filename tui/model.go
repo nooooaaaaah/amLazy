@@ -102,7 +102,7 @@ func (m *Model) makeAPICall() tea.Cmd {
 	return func() tea.Msg {
 		logger := config.GetLogger()
 		logger.LogInfo("Sending input to OpenAI: " + m.Input.Value())
-		response, err := m.Client.ProcessInput(m.Input.Value())
+		response, err := m.Client.ProcessInput(m.Input.Value(), config.GetEnvInstructions())
 		if err != nil {
 			logger.LogError("Error processing input: " + err.Error())
 			return "Error: " + err.Error()

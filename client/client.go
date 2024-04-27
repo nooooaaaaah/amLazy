@@ -22,7 +22,7 @@ func NewClient(apiKey, assistantID string) *Client {
 	}
 }
 
-func (c *Client) ProcessInput(input string) (string, error) {
+func (c *Client) ProcessInput(input, userEnvInstructions string) (string, error) {
 	logger := config.GetLogger()
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Minute)
 	defer cancel()
@@ -38,7 +38,7 @@ func (c *Client) ProcessInput(input string) (string, error) {
 		return "", err
 	}
 
-	if err := c.startThread(ctx, threadID); err != nil {
+	if err := c.startThread(ctx, threadID, userEnvInstructions); err != nil {
 		return "", err
 	}
 
@@ -70,9 +70,9 @@ func (c *Client) sendMessage(ctx context.Context, threadID string, input string)
 	return nil
 }
 
-func (c *Client) startThread(ctx context.Context, threadID string) error {
+func (c *Client) startThread(ctx context.Context, threadID, userEnvInstructions string) error {
 	logger := config.GetLogger()
-	run, err := c.apiClient.CreateRun(ctx, threadID, openai.RunRequest{AssistantID: c.assistantID})
+	run, err := c.apiClient.CreateRun(ctx, threadID, openai.RunRequest{AssistantID: c.assistantID, Instructions: userEnvInstructions})
 	if err != nil {
 		logger.LogErrorf("failed to start the thread: %v", err)
 		return fmt.Errorf("failed to start the thread: %w", err)
