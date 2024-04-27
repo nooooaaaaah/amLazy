@@ -4,8 +4,8 @@ import (
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/nooooaaaaah/amLazy/client"
 	"github.com/nooooaaaaah/amLazy/config"
-	"github.com/nooooaaaaah/amLazy/openai"
 	"github.com/nooooaaaaah/amLazy/tui"
 )
 
@@ -23,7 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	client := openai.NewClient(apiKey, assistantID)
+	client := client.NewClient(apiKey, assistantID)
 	model := tui.InitialModel(client)
 
 	p := tea.NewProgram(model)

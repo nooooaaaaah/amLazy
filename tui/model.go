@@ -7,14 +7,14 @@ import (
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+	"github.com/nooooaaaaah/amLazy/client"
 	"github.com/nooooaaaaah/amLazy/config"
-	"github.com/nooooaaaaah/amLazy/openai"
 )
 
 type Model struct {
 	Input  textinput.Model
 	Output string
-	Client *openai.Client
+	Client *client.Client
 	Sent   bool
 	Info   string
 }
@@ -24,7 +24,7 @@ var controlKeysStyle = lipgloss.NewStyle().
 	PaddingTop(1).
 	PaddingBottom(1)
 
-func InitialModel(client *openai.Client) *Model {
+func InitialModel(client *client.Client) *Model {
 	input := textinput.New()
 	input.Placeholder = "Type your question"
 	input.Focus()
