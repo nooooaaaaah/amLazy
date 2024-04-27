@@ -6,12 +6,13 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 
 - **Command Builder**: get a command based on the provided prompt
 - **Copy Output**: press crtl-y to copy output and close the app
+- **RePrompt**: press crtl-i to edit and resend a prompt
 
 ## TODO
 
 - **Better app logging**: need to have togglable logging
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
-- **Refine a comand**: Reprompt so you can add more to a command
+- **Refine a comand**: Reprompt but with history and context
 - **Educational Mode**: Toggle an educational mode that explains the function and potential uses of different commands and flags.
 - **Install via pkg managers**: Create a pkg for brew and others
 
