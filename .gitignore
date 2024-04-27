@@ -16,6 +16,8 @@ amLazy
 # Output of the go coverage tool
 *.out
 
+# Mac
+.DS_Store
 
 # Env
 .env
