@@ -10,7 +10,6 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 
 ## TODO
 
-- **Better app logging**: need to have togglable logging
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
 - **Refine a comand**: Reprompt but with history and context
 - **Educational Mode**: Toggle an educational mode that explains the function and potential uses of different commands and flags.
@@ -40,7 +39,7 @@ cd ~/.config/amLazy
 touch config.env
 ```
 
-Open the config.env file and add your api key, assistant id, shell and OS
+Open the config.env file and add your api key, assistant id, shell, OS and debug logging options
 
 ```sh
 nvim config.env
@@ -53,6 +52,7 @@ OPENAI_API_KEY="{YOUR_API_KEY}"
 OPENAI_ASSISTANT_ID="{YOUR_ASSISTANT_ID}"
 USERS_SHELL="{SHELL}"
 USERS_OS="{OS}"
+LOGGING_ENABLED="false"
 ```
 
 #### Setup Assistant
