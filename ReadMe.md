@@ -10,11 +10,10 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 ## TODO
 
 - **Better app logging**: need to have togglable logging
-- **Provide ai with some sys info**: Send the os and which shell the user has activated. Makes the prompting less verbose
-- **Install via pkg managers**: Create a pkg for brew and others
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
 - **Refine a comand**: Reprompt so you can add more to a command
 - **Educational Mode**: Toggle an educational mode that explains the function and potential uses of different commands and flags.
+- **Install via pkg managers**: Create a pkg for brew and others
 
 ## Getting Started
 
@@ -27,20 +26,20 @@ To start using amLazy, ensure you have a modern terminal emulator and basic shel
 git clone https://github.com/nooooaaaaah/amLazy.git
 ```
 
-Then create a directory amLazy under .config for api keys
+Then create a directory amLazy under .config for api keys and other environment variables
 
 ```sh
 mkdir ~/.config/amLazy
 ```
 
-With the file config.env
+Then add the file config.env
 
 ```sh
 cd ~/.config/amLazy
 touch config.env
 ```
 
-Then open the confi.env file and add your api key and assistant id
+Open the config.env file and add your api key, assistant id, shell and OS
 
 ```sh
 nvim config.env
@@ -51,6 +50,8 @@ It should look like this
 ```.env
 OPENAI_API_KEY="{YOUR_API_KEY}"
 OPENAI_ASSISTANT_ID="{YOUR_ASSISTANT_ID}"
+USERS_SHELL="{SHELL}"
+USERS_OS="{OS}"
 ```
 
 #### Setup Assistant
@@ -72,8 +73,6 @@ amLazy
 3. **Using the Assistant**
 
 - **Type your task or command intent**: Such as "compress folder" or "download file from URL".
-
-> Add "on {YOUR SHELL ENV}" for better results
 
 ```bash
 amLazy
