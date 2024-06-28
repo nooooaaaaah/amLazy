@@ -11,20 +11,32 @@ Welcome to the amLazy Assistant, the friendly AI-powered TUI (Text-based User In
 ## TODO
 
 - **Interactive Command Builder**: Guides you through the process of building shell commands.
-- **Refine a comand**: Reprompt but with history and context
 - **Educational Mode**: Toggle an educational mode that explains the function and potential uses of different commands and flags.
-- **Install via pkg managers**: Create a pkg for brew and others
+- **Install via pkg managers**: implement GoReleaser
 
 ## Getting Started
 
 To start using amLazy, ensure you have a modern terminal emulator and basic shell access.
 
 1. **Installation**
-   As of now just Clone and build. Then copy to bin or wherever your commands are stored.
+
+  As of now just Clone and build. Then copy to bin or wherever your commands are stored.
 
 ```sh
 git clone https://github.com/nooooaaaaah/amLazy.git
 ```
+
+or
+
+  If you really want to you can use go install
+
+```sh
+go install github.com/nooooaaaaah/amLazy/cmd@latest
+```
+
+  It'll install it as cmd
+
+2. **Setup**
 
 Then create a directory amLazy under .config for api keys and other environment variables
 
@@ -81,3 +93,5 @@ amLazy
 ```
 
 - **Execute or Edit**: Once you're satisfied with the suggested command copy it to the clipboard for manual execution.
+
+> I'm always open for feedback or If you want to implement a feature please go ahead
