@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -12,6 +13,10 @@ import (
 type Client struct {
 	apiClient   *openai.Client
 	assistantID string
+}
+
+type MsgRsponse struct {
+	Msg string `json:"msg"`
 }
 
 // NewClient creates a new Client instance with the specified API key and assistant ID.
@@ -107,9 +112,16 @@ func (c *Client) retrieveResponse(ctx context.Context, threadID string) (string,
 
 	logger.LogInfo("retrieved messages")
 	if len(msgs.Messages) > 0 {
+		logger.LogInfof("%v", msgs.Messages)
 		response := msgs.Messages[0].Content[0].Text.Value
+		var msg MsgRsponse
+		err := json.Unmarshal([]byte(response), &msg)
+		if err != nil {
+			return "", fmt.Errorf("failed to unmarshal response message: %w", err)
+		}
 		logger.LogInfof("First response: %s", response)
-		return response, nil
+		logger.LogInfo(msg.Msg)
+		return msg.Msg, nil
 	}
 	return "No response received", nil
 }

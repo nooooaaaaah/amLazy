@@ -33,7 +33,7 @@ func getUserOS() string {
 }
 
 func GetEnvInstructions() string {
-	return fmt.Sprintf("My shell is %s, and my os is %s. Only return one option, just return the command", getUserShell(), getUserOS())
+	return fmt.Sprintf("My shell is %s, and my os is %s. Only the command no instructions, response format should be json { msg: cmd }", getUserShell(), getUserOS())
 }
 
 type CustomLogger struct {
